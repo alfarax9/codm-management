@@ -24,6 +24,7 @@ const NAV = [
 
 export function AppSidebar({ orgName, userLabel }: { orgName: string; userLabel: string }) {
   const t = useTranslations('nav')
+  const tAuth = useTranslations('auth')
   const pathname = usePathname()
 
   return (
@@ -58,7 +59,7 @@ export function AppSidebar({ orgName, userLabel }: { orgName: string; userLabel:
         <LanguageSwitcher className="self-start" />
         <form action={signOut}>
           <Button type="submit" variant="ghost" size="sm" className="w-full justify-start">
-            Keluar
+            {tAuth('signOut')}
           </Button>
         </form>
       </div>

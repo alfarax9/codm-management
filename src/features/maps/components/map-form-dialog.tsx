@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useState, useTransition, type ReactElement } from 'react'
 import { toast } from 'sonner'
 
@@ -31,6 +32,7 @@ export function MapFormDialog({
   map?: MapListItem
   trigger: ReactElement
 }) {
+  const t = useTranslations('maps')
   const [open, setOpen] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
@@ -60,21 +62,19 @@ export function MapFormDialog({
       <DialogContent>
         <form action={action} className="flex flex-col gap-4">
           <DialogHeader>
-            <DialogTitle>{map ? 'Ubah Map' : 'Tambah Map'}</DialogTitle>
-            <DialogDescription>
-              Mode yang dicentang menentukan di dropdown mana map ini muncul saat mengisi scrim.
-            </DialogDescription>
+            <DialogTitle>{map ? t('editTitle') : t('addTitle')}</DialogTitle>
+            <DialogDescription>{t('dialogDescription')}</DialogDescription>
           </DialogHeader>
 
           {map && <input type="hidden" name="id" value={map.id} />}
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="name">Nama map</Label>
-            <Input id="name" name="name" defaultValue={map?.name} required placeholder="Summit" />
+            <Label htmlFor="name">{t('name')}</Label>
+            <Input id="name" name="name" defaultValue={map?.name} required placeholder={t('namePlaceholder')} />
           </div>
 
           <fieldset>
-            <legend className="mb-2 text-sm font-medium">Dimainkan di mode</legend>
+            <legend className="mb-2 text-sm font-medium">{t('playedIn')}</legend>
             <div className="flex flex-wrap gap-4">
               {modes.map((mode) => (
                 <label key={mode.id} className="flex items-center gap-2 text-sm">
@@ -94,16 +94,14 @@ export function MapFormDialog({
           </fieldset>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="image">Gambar map</Label>
+            <Label htmlFor="image">{t('image')}</Label>
             <Input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp" />
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="minimap">Denah / minimap</Label>
+            <Label htmlFor="minimap">{t('minimap')}</Label>
             <Input id="minimap" name="minimap" type="file" accept="image/png,image/jpeg,image/webp" />
-            <p className="text-xs text-muted-foreground">
-              Dipakai Strategy Board nanti. Boleh dikosongkan.
-            </p>
+            <p className="text-xs text-muted-foreground">{t('minimapHint')}</p>
           </div>
 
           {error && (
@@ -114,7 +112,7 @@ export function MapFormDialog({
 
           <DialogFooter>
             <Button type="submit" disabled={pending}>
-              {pending ? 'Menyimpan…' : 'Simpan'}
+              {pending ? t('saving') : t('save')}
             </Button>
           </DialogFooter>
         </form>

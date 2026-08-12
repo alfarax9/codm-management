@@ -71,7 +71,11 @@
     },
     "game": "Game {no}",
     "declareOutcome": "Tentukan hasil map",
-    "result": { "win": "Menang", "loss": "Kalah", "tie": "Seri" },
+    "result": {
+      "win": "Menang",
+      "loss": "Kalah",
+      "tie": "Seri"
+    },
     "autofill": "Isi otomatis dari screenshot",
     "playerStats": "Statistik Pemain",
     "mapFlow": "Alur Map",
@@ -83,7 +87,11 @@
       "bomb_defused": "Bom Dijinakkan",
       "time_expired": "Waktu Habis"
     },
-    "side": { "label": "Sisi", "atk": "Menyerang", "def": "Bertahan" }
+    "side": {
+      "label": "Sisi",
+      "atk": "Menyerang",
+      "def": "Bertahan"
+    }
   },
   "composition": {
     "quotaExceeded": "Mode {mode} sudah melebihi kuota ({used} dari {allowed}).",
@@ -96,7 +104,11 @@
     "upload": "Unggah Ruleset",
     "review": "Tinjau Hasil Parsing",
     "activate": "Aktifkan",
-    "status": { "draft": "Draf", "active": "Aktif", "archived": "Arsip" },
+    "status": {
+      "draft": "Draf",
+      "active": "Aktif",
+      "archived": "Arsip"
+    },
     "aiDraft": "Draf AI — perlu ditinjau",
     "allowed": "Boleh",
     "banned": "Dilarang",
@@ -137,14 +149,33 @@
     "minimap": "Denah (Minimap)",
     "playedIn": "Dimainkan di mode",
     "official": "Resmi",
-    "custom": "Kustom"
+    "custom": "Kustom",
+    "addTitle": "Tambah Map",
+    "editTitle": "Ubah Map",
+    "dialogDescription": "Mode yang dicentang menentukan di dropdown mana map ini muncul saat mengisi scrim.",
+    "namePlaceholder": "Summit",
+    "minimapHint": "Dipakai Strategy Board nanti. Boleh dikosongkan.",
+    "noImage": "Tanpa gambar",
+    "edit": "Ubah",
+    "deleteAria": "Hapus {name}",
+    "count": "{count} map · dikelola di level organisasi, dipakai semua roster.",
+    "empty": "Belum ada map.",
+    "saving": "Menyimpan…",
+    "save": "Simpan"
   },
   "analyst": {
     "title": "Analyst",
     "assign": "Tugaskan Analyst",
-    "scope": { "scrim": "Per Scrim", "week": "Per Minggu" },
+    "scope": {
+      "scrim": "Per Scrim",
+      "week": "Per Minggu"
+    },
     "myAssignments": "Tugas Saya",
-    "status": { "pending": "Belum dikerjakan", "in_progress": "Sedang dikerjakan", "done": "Selesai" },
+    "status": {
+      "pending": "Belum dikerjakan",
+      "in_progress": "Sedang dikerjakan",
+      "done": "Selesai"
+    },
     "weeklyReport": "Rapor Mingguan",
     "grade": "Nilai",
     "strengths": "Kekuatan",
@@ -156,6 +187,126 @@
       "consistency": "Konsistensi",
       "utility": "Utility",
       "comms": "Komunikasi"
+    }
+  },
+  "auth": {
+    "loginDescription": "Masukkan email kamu, lalu buka tautan login yang dikirim ke sana.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "nama@tim.com",
+    "sending": "Mengirim…",
+    "sendMagicLink": "Kirim tautan login",
+    "signOut": "Keluar"
+  },
+  "org": {
+    "createTitle": "Buat organisasi",
+    "createDescription": "Map pool, format scrim, katalog senjata, dan ruleset World Championship 2026 akan langsung terisi supaya bisa dipakai hari ini juga.",
+    "nameLabel": "Nama organisasi",
+    "namePlaceholder": "ACE Esports",
+    "teamNameLabel": "Nama roster pertama",
+    "teamNamePlaceholder": "ACE Main",
+    "teamNameHint": "Roster lain (academy, dsb) bisa ditambah nanti dari Pengaturan.",
+    "creating": "Menyiapkan…",
+    "createButton": "Buat organisasi",
+    "roleLabel": "peran kamu"
+  },
+  "pages": {
+    "dashboard": {
+      "pending": "Ringkasan tim — menunggu scrim pertama dilaporkan",
+      "items": [
+        "Rekor menang–kalah dan win rate per mode",
+        "Tren K/D tim beberapa scrim terakhir",
+        "Map terkuat dan terlemah",
+        "Scrim terjadwal berikutnya"
+      ]
+    },
+    "scrims": {
+      "description": "Daftar scrim, pengisian hasil per map, dan alur ronde.",
+      "pending": "Riwayat scrim",
+      "items": [
+        "Buat scrim: lawan, format (mis. 232), jadwal, ruleset yang dipakai",
+        "Slot game dibuat sesuai kuota format; mode tiap slot dipilih dari sisa kuota",
+        "Report Scores: hasil map, skor, dan tabel stat pemain per mode",
+        "Kolom stat mengikuti mode — Hardpoint dan Control punya kolom Waktu",
+        "Auto-fill dari screenshot scoreboard",
+        "Map Flow: ronde SnD, hill Hardpoint, ronde Control"
+      ]
+    },
+    "roster": {
+      "description": "Pemain per roster, peran, dan statistiknya.",
+      "pending": "Manajemen roster",
+      "items": [
+        "Tambah pemain: IGN, UID, alias untuk pencocokan scoreboard",
+        "Weapon class role yang dideklarasikan tiap pemain",
+        "Tandai pemain cadangan dan pemain non-aktif",
+        "Kartu statistik ringkas per pemain",
+        "Hubungkan pemain ke akun agar bisa mengisi loadout sendiri"
+      ]
+    },
+    "loadouts": {
+      "description": "Loadout tiap pemain, diperiksa terhadap ruleset yang sedang aktif.",
+      "pending": "Loadout & kepatuhan",
+      "items": [
+        "Pilih senjata, attachment, perk, lethal, tactical, operator skill, scorestreak",
+        "Item yang melanggar ditandai merah beserta alasannya",
+        "Peringatan operator skill kembar dalam satu tim",
+        "Pemeriksaan pool weapon class role: 3 AR / 3 SMG / 1 LMG / 1 Shotgun / 1 Marksman / 1 Sniper",
+        "Panel kepatuhan tim: matriks 5 pemain kali kategori"
+      ]
+    },
+    "rules": {
+      "description": "Unggah dokumen aturan turnamen, tinjau hasil bacanya, lalu aktifkan.",
+      "pending": "Ruleset",
+      "items": [
+        "Unggah gambar atau PDF ruleset",
+        "Hasil parsing AI ditandai sebagai draf yang perlu ditinjau",
+        "Tinjau per kategori: senjata, attachment, perk, utility, operator skill, scorestreak, kosmetik",
+        "Pengaturan lobby per mode dan map pool",
+        "Pencarian: ketik nama item untuk tahu boleh atau dilarang",
+        "Aktifkan ruleset — dipakai semua scrim yang menunjuk ke sana"
+      ]
+    },
+    "formats": {
+      "description": "Kode format menentukan jumlah map per mode. Urutan mainnya bebas.",
+      "pending": "Format scrim",
+      "items": [
+        "Daftar format yang sudah ada beserta jumlah game-nya",
+        "Format Builder: atur jumlah map per mode, kode dan total game dihitung otomatis",
+        "Nonaktifkan format yang tidak lagi dipakai"
+      ]
+    },
+    "analytics": {
+      "description": "Analisis dari statistik scrim yang tercatat.",
+      "pending": "Analitik",
+      "items": [
+        "Win rate per map dan per mode",
+        "Head-to-head melawan lawan tertentu",
+        "Map yang K/D-nya positif tapi tetap kalah",
+        "Map yang K/D-nya negatif tapi menang",
+        "SnD yang berlanjut sampai ronde penentuan",
+        "Alur skor: hill demi hill, ronde demi ronde"
+      ]
+    },
+    "analyst": {
+      "description": "Penugasan analyst dan rapor performa mingguan tiap pemain.",
+      "pending": "Analyst",
+      "items": [
+        "Tugaskan analyst per scrim atau per minggu, opsional fokus ke satu pemain",
+        "Inbox tugas: belum dikerjakan, sedang dikerjakan, selesai",
+        "Rapor mingguan per pemain: metrik terhitung, nilai, dan perubahan dari minggu lalu",
+        "Kekuatan dan kelemahan ditulis analyst, dengan tombol draf AI dari angka",
+        "Ringkasan tim: mode terlemah dan map yang sebaiknya di-ban"
+      ]
+    },
+    "settings": {
+      "pending": "Pengaturan organisasi",
+      "items": [
+        "Roster: tambah tim baru (main, academy)",
+        "Anggota dan peran: owner, admin, coach, analyst, player, viewer",
+        "Undangan lewat email",
+        "Lawan yang tercatat",
+        "Minggu sebagai periode review",
+        "Preferensi bahasa akun"
+      ]
     }
   }
 }

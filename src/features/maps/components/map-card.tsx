@@ -1,6 +1,7 @@
 'use client'
 
 import { Trash2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useTransition } from 'react'
 import { toast } from 'sonner'
@@ -24,6 +25,7 @@ export function MapCard({
   modes: Mode[]
   canManage: boolean
 }) {
+  const t = useTranslations('maps')
   const [pending, startTransition] = useTransition()
 
   const handleDelete = () => {
@@ -47,7 +49,7 @@ export function MapCard({
           />
         ) : (
           <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
-            Tanpa gambar
+            {t('noImage')}
           </div>
         )}
       </div>
@@ -57,7 +59,7 @@ export function MapCard({
           <div>
             <p className="font-medium">{map.name}</p>
             <p className="text-xs text-muted-foreground">
-              {map.isOfficial ? 'Resmi' : 'Kustom'}
+              {map.isOfficial ? t('official') : t('custom')}
             </p>
           </div>
           <div className="flex flex-wrap justify-end gap-1">
@@ -76,7 +78,7 @@ export function MapCard({
               map={map}
               trigger={
                 <Button variant="outline" size="sm" className="flex-1">
-                  Ubah
+                  {t('edit')}
                 </Button>
               }
             />
@@ -85,7 +87,7 @@ export function MapCard({
               size="sm"
               onClick={handleDelete}
               disabled={pending}
-              aria-label={`Hapus ${map.name}`}
+              aria-label={t('deleteAria', { name: map.name })}
             >
               <Trash2 className="size-4" />
             </Button>

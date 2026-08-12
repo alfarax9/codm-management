@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import type { ReactNode } from 'react'
 
 /**
@@ -30,11 +31,18 @@ export function PageShell({
   )
 }
 
-/** Penanda area yang fungsinya sudah disepakati tapi UI-nya belum dibangun. */
-export function Pending({ label, items }: { label: string; items: string[] }) {
+/**
+ * Penanda area yang fungsinya sudah disepakati tapi UI-nya belum dibangun.
+ * Isinya diambil dari `messages/*.json` di `pages.<pageKey>` supaya ikut
+ * berganti bahasa seperti bagian aplikasi lainnya.
+ */
+export async function FeaturePlaceholder({ pageKey }: { pageKey: string }) {
+  const t = await getTranslations(`pages.${pageKey}`)
+  const items = t.raw('items') as string[]
+
   return (
     <section className="rounded-lg border border-dashed border-border p-6">
-      <p className="text-sm font-medium">{label}</p>
+      <p className="text-sm font-medium">{t('pending')}</p>
       <ul className="mt-3 flex flex-col gap-1.5">
         {items.map((item) => (
           <li key={item} className="text-sm text-muted-foreground">

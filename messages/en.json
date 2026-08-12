@@ -71,7 +71,11 @@
     },
     "game": "Game {no}",
     "declareOutcome": "Declare map outcome",
-    "result": { "win": "Win", "loss": "Loss", "tie": "Tie" },
+    "result": {
+      "win": "Win",
+      "loss": "Loss",
+      "tie": "Tie"
+    },
     "autofill": "Auto-fill from screenshot",
     "playerStats": "Player Stats",
     "mapFlow": "Map Flow",
@@ -83,7 +87,11 @@
       "bomb_defused": "Bomb Defused",
       "time_expired": "Time Expired"
     },
-    "side": { "label": "Side", "atk": "Attack", "def": "Defense" }
+    "side": {
+      "label": "Side",
+      "atk": "Attack",
+      "def": "Defense"
+    }
   },
   "composition": {
     "quotaExceeded": "{mode} exceeds its quota ({used} of {allowed}).",
@@ -96,7 +104,11 @@
     "upload": "Upload Ruleset",
     "review": "Review Parsed Rules",
     "activate": "Activate",
-    "status": { "draft": "Draft", "active": "Active", "archived": "Archived" },
+    "status": {
+      "draft": "Draft",
+      "active": "Active",
+      "archived": "Archived"
+    },
     "aiDraft": "AI draft — needs review",
     "allowed": "Allowed",
     "banned": "Banned",
@@ -137,14 +149,33 @@
     "minimap": "Minimap",
     "playedIn": "Played in modes",
     "official": "Official",
-    "custom": "Custom"
+    "custom": "Custom",
+    "addTitle": "Add Map",
+    "editTitle": "Edit Map",
+    "dialogDescription": "The modes you tick decide which dropdown this map appears in when filling a scrim.",
+    "namePlaceholder": "Summit",
+    "minimapHint": "Used by the Strategy Board later. Can be left empty.",
+    "noImage": "No image",
+    "edit": "Edit",
+    "deleteAria": "Delete {name}",
+    "count": "{count} maps · managed at organization level, shared by all rosters.",
+    "empty": "No maps yet.",
+    "saving": "Saving…",
+    "save": "Save"
   },
   "analyst": {
     "title": "Analyst",
     "assign": "Assign Analyst",
-    "scope": { "scrim": "Per Scrim", "week": "Per Week" },
+    "scope": {
+      "scrim": "Per Scrim",
+      "week": "Per Week"
+    },
     "myAssignments": "My Assignments",
-    "status": { "pending": "Pending", "in_progress": "In progress", "done": "Done" },
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In progress",
+      "done": "Done"
+    },
     "weeklyReport": "Weekly Report",
     "grade": "Grade",
     "strengths": "Strengths",
@@ -156,6 +187,126 @@
       "consistency": "Consistency",
       "utility": "Utility",
       "comms": "Comms"
+    }
+  },
+  "auth": {
+    "loginDescription": "Enter your email, then open the login link sent to it.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "name@team.com",
+    "sending": "Sending…",
+    "sendMagicLink": "Send login link",
+    "signOut": "Sign out"
+  },
+  "org": {
+    "createTitle": "Create organization",
+    "createDescription": "Map pool, scrim formats, weapon catalog, and the World Championship 2026 ruleset are filled in right away so you can use it today.",
+    "nameLabel": "Organization name",
+    "namePlaceholder": "ACE Esports",
+    "teamNameLabel": "First roster name",
+    "teamNamePlaceholder": "ACE Main",
+    "teamNameHint": "Other rosters (academy, etc.) can be added later from Settings.",
+    "creating": "Setting up…",
+    "createButton": "Create organization",
+    "roleLabel": "your role"
+  },
+  "pages": {
+    "dashboard": {
+      "pending": "Team summary — waiting for the first scrim to be reported",
+      "items": [
+        "Win–loss record and win rate per mode",
+        "Team K/D trend over recent scrims",
+        "Strongest and weakest maps",
+        "Next scheduled scrim"
+      ]
+    },
+    "scrims": {
+      "description": "Scrim list, per-map result entry, and round flow.",
+      "pending": "Scrim history",
+      "items": [
+        "Create a scrim: opponent, format (e.g. 232), schedule, ruleset in use",
+        "Game slots follow the format quota; each slot picks a mode from what's left",
+        "Report Scores: map result, score, and per-mode player stat table",
+        "Stat columns follow the mode — Hardpoint and Control have a Time column",
+        "Auto-fill from a scoreboard screenshot",
+        "Map Flow: SnD rounds, Hardpoint hills, Control rounds"
+      ]
+    },
+    "roster": {
+      "description": "Players per roster, their roles, and their stats.",
+      "pending": "Roster management",
+      "items": [
+        "Add a player: IGN, UID, aliases for scoreboard matching",
+        "Weapon class roles each player declares",
+        "Mark substitutes and inactive players",
+        "Compact stat card per player",
+        "Link a player to an account so they can fill in their own loadout"
+      ]
+    },
+    "loadouts": {
+      "description": "Each player's loadout, checked against the active ruleset.",
+      "pending": "Loadouts & compliance",
+      "items": [
+        "Pick weapon, attachments, perks, lethal, tactical, operator skill, scorestreaks",
+        "Violating items are marked red with the reason",
+        "Warning when two teammates share an operator skill",
+        "Weapon class role pool check: 3 AR / 3 SMG / 1 LMG / 1 Shotgun / 1 Marksman / 1 Sniper",
+        "Team compliance panel: 5 players by category matrix"
+      ]
+    },
+    "rules": {
+      "description": "Upload the tournament ruleset, review how it was read, then activate it.",
+      "pending": "Ruleset",
+      "items": [
+        "Upload a ruleset image or PDF",
+        "AI parsing results are marked as a draft needing review",
+        "Review per category: weapons, attachments, perks, utility, operator skills, scorestreaks, cosmetics",
+        "Per-mode lobby settings and map pool",
+        "Search: type an item name to see whether it is allowed or banned",
+        "Activate the ruleset — used by every scrim pointing to it"
+      ]
+    },
+    "formats": {
+      "description": "The format code sets how many maps each mode gets. Play order is free.",
+      "pending": "Scrim formats",
+      "items": [
+        "List of existing formats and their game counts",
+        "Format Builder: set maps per mode, code and total games computed automatically",
+        "Deactivate formats no longer in use"
+      ]
+    },
+    "analytics": {
+      "description": "Analysis from recorded scrim statistics.",
+      "pending": "Analytics",
+      "items": [
+        "Win rate per map and per mode",
+        "Head-to-head against a specific opponent",
+        "Maps with positive K/D that were still lost",
+        "Maps with negative K/D that were won",
+        "SnD maps that went to the deciding round",
+        "Score flow: hill by hill, round by round"
+      ]
+    },
+    "analyst": {
+      "description": "Analyst assignments and weekly performance reports per player.",
+      "pending": "Analyst",
+      "items": [
+        "Assign an analyst per scrim or per week, optionally focused on one player",
+        "Task inbox: pending, in progress, done",
+        "Weekly report per player: computed metrics, grade, and change from last week",
+        "Strengths and weaknesses written by the analyst, with an AI draft button from the numbers",
+        "Team summary: weakest mode and maps worth banning"
+      ]
+    },
+    "settings": {
+      "pending": "Organization settings",
+      "items": [
+        "Rosters: add a new team (main, academy)",
+        "Members and roles: owner, admin, coach, analyst, player, viewer",
+        "Email invitations",
+        "Recorded opponents",
+        "Weeks as review periods",
+        "Account language preference"
+      ]
     }
   }
 }

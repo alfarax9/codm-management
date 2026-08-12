@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { Alert, AlertDescription } from '@/components/ui/alert'
@@ -10,25 +11,24 @@ import type { ActionState } from '@/features/auth/actions'
 import { createOrg } from '@/features/org/actions'
 
 export function CreateOrgForm() {
+  const t = useTranslations('org')
   const [state, action, pending] = useActionState<ActionState, FormData>(createOrg, {})
 
   return (
     <form action={action} className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <Label htmlFor="name">Nama organisasi</Label>
-        <Input id="name" name="name" required placeholder="ACE Esports" />
+        <Label htmlFor="name">{t('nameLabel')}</Label>
+        <Input id="name" name="name" required placeholder={t('namePlaceholder')} />
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="teamName">Nama roster pertama</Label>
-        <Input id="teamName" name="teamName" required placeholder="ACE Main" />
-        <p className="text-xs text-muted-foreground">
-          Roster lain (academy, dsb) bisa ditambah nanti dari Pengaturan.
-        </p>
+        <Label htmlFor="teamName">{t('teamNameLabel')}</Label>
+        <Input id="teamName" name="teamName" required placeholder={t('teamNamePlaceholder')} />
+        <p className="text-xs text-muted-foreground">{t('teamNameHint')}</p>
       </div>
 
       <Button type="submit" disabled={pending}>
-        {pending ? 'Menyiapkan…' : 'Buat organisasi'}
+        {pending ? t('creating') : t('createButton')}
       </Button>
 
       {state.error && (

@@ -21,9 +21,7 @@ export default async function MapsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold">{t('title')}</h1>
-          <p className="text-sm text-muted-foreground">
-            {maps.length} map · dikelola di level organisasi, dipakai semua roster.
-          </p>
+          <p className="text-sm text-muted-foreground">{t('count', { count: maps.length })}</p>
         </div>
         {canManage && (
           <MapFormDialog modes={modes} trigger={<Button>{t('upload')}</Button>} />
@@ -31,7 +29,7 @@ export default async function MapsPage() {
       </div>
 
       {maps.length === 0 ? (
-        <p className="text-sm text-muted-foreground">Belum ada map.</p>
+        <p className="text-sm text-muted-foreground">{t('empty')}</p>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {maps.map((map) => (
