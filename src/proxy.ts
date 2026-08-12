@@ -1,7 +1,12 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-const PUBLIC_PATHS = ['/login', '/auth', '/invite']
+/**
+ * Satu-satunya halaman yang boleh dibuka tanpa sesi. Semua route lain — termasuk
+ * yang belum dibuat — otomatis tertutup, karena daftarnya berupa izin, bukan
+ * larangan. Menambah fitur baru tidak akan sengaja membukanya untuk publik.
+ */
+const PUBLIC_PATHS = ['/login', '/daftar', '/lupa-kata-sandi', '/auth', '/invite']
 
 /**
  * Menyegarkan token Supabase di tiap request dan menjaga halaman aplikasi

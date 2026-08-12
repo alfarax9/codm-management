@@ -8,11 +8,21 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { signIn, type ActionState } from '@/features/auth/actions'
+import { signUp, type ActionState } from '@/features/auth/actions'
 
-export function LoginForm() {
+export function SignUpForm() {
   const t = useTranslations('auth')
-  const [state, action, pending] = useActionState<ActionState, FormData>(signIn, {})
+  const [state, action, pending] = useActionState<ActionState, FormData>(signUp, {})
+
+  // Setelah pendaftaran berhasil, formnya diganti pesan — menampilkan kembali
+  // field yang sudah diisi hanya mengundang orang menekan daftar dua kali.
+  if (state.message) {
+    return (
+      <Alert>
+        <AlertDescription>{state.message}</AlertDescription>
+      </Alert>
+    )
+  }
 
   return (
     <form action={action} className="flex flex-col gap-4">
@@ -29,26 +39,32 @@ export function LoginForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="password">{t('passwordLabel')}</Label>
-          <Link
-            href="/lupa-kata-sandi"
-            className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-          >
-            {t('forgotPassword')}
-          </Link>
-        </div>
+        <Label htmlFor="password">{t('passwordLabel')}</Label>
         <Input
           id="password"
           name="password"
           type="password"
-          autoComplete="current-password"
+          autoComplete="new-password"
+          minLength={8}
+          required
+        />
+        <p className="text-xs text-muted-foreground">{t('passwordHint')}</p>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="confirmPassword">{t('confirmPasswordLabel')}</Label>
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          autoComplete="new-password"
+          minLength={8}
           required
         />
       </div>
 
       <Button type="submit" disabled={pending}>
-        {pending ? t('signingIn') : t('signIn')}
+        {pending ? t('signingUp') : t('signUp')}
       </Button>
 
       {state.error && (
@@ -58,9 +74,9 @@ export function LoginForm() {
       )}
 
       <p className="text-center text-sm text-muted-foreground">
-        {t('noAccount')}{' '}
-        <Link href="/daftar" className="underline underline-offset-4">
-          {t('signUp')}
+        {t('haveAccount')}{' '}
+        <Link href="/login" className="underline underline-offset-4">
+          {t('signIn')}
         </Link>
       </p>
     </form>

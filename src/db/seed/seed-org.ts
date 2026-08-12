@@ -21,7 +21,6 @@ import {
 } from '../schema'
 import {
   MODE_ORDER,
-  MODES,
   quotaFromCode,
   SERIES_FORMAT_CODES,
   WC2026_ALLOWED_OPERATOR_SKILLS,
@@ -46,19 +45,21 @@ const slugify = (name: string) =>
     .replace(/^-|-$/g, '')
 
 /**
- * Mengisi data referensi sebuah organisasi: mode, format scrim, map pool,
- * katalog item, dan ruleset World Championship 2026 sebagai titik awal.
+ * Mengisi data referensi sebuah organisasi: format scrim, map pool, katalog item,
+ * dan ruleset World Championship 2026 sebagai titik awal.
  *
  * Dipanggil saat organisasi dibuat lewat aplikasi, dan juga oleh `npm run db:seed`
  * untuk organisasi yang sudah terlanjur ada. Aman dijalankan berulang.
+ *
+ * Mode TIDAK ikut diisi di sini — datanya global dan dipasang lewat migrasi
+ * `0004_seed_modes.sql`. Selain karena bukan milik organisasi, `modes.sort_order`
+ * menentukan arti kode format scrim, jadi tidak boleh bisa ditulis dari aplikasi.
  */
 export async function seedOrgReference(tx: Tx, orgId: string, createdBy?: string) {
-  await tx
-    .insert(modes)
-    .values(MODES.map((m) => ({ ...m, statColumns: [...m.statColumns] })))
-    .onConflictDoNothing({ target: modes.code })
-
   const modeRows = await tx.select().from(modes)
+  if (modeRows.length === 0) {
+    throw new Error('Tabel modes kosong — jalankan `npm run db:migrate` lebih dulu.')
+  }
   const modeIdByCode = new Map(modeRows.map((m) => [m.code, m.id]))
 
   await tx

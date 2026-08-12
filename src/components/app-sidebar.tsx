@@ -57,6 +57,12 @@ export function AppSidebar({ orgName, userLabel }: { orgName: string; userLabel:
 
       <div className="mt-auto flex flex-col gap-3 pt-6">
         <LanguageSwitcher className="self-start" />
+        <Link
+          href="/akun/kata-sandi"
+          className="rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+        >
+          {tAuth('changePasswordTitle')}
+        </Link>
         <form action={signOut}>
           <Button type="submit" variant="ghost" size="sm" className="w-full justify-start">
             {tAuth('signOut')}
