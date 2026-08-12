@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude-in-chrome__browser_batch",
+      "mcp__claude-in-chrome__find",
+      "mcp__claude-in-chrome__computer",
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@latest . --ts --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm --yes)"
+    ]
+  }
+}
