@@ -8,12 +8,17 @@ Desain lengkap ada di [docs/BRAINSTORM.md](docs/BRAINSTORM.md).
 ```bash
 cp .env.example .env.local   # isi kredensial Supabase
 npm install
-npm run db:push              # buat tabel di Supabase
+npm run db:migrate           # tabel + RLS + trigger + bucket Storage
 npm run dev
 ```
 
-Setelah organisasi pertama dibuat lewat aplikasi, isi data referensi
-(mode, format scrim, map pool, katalog senjata, ruleset WC 2026):
+Pakai `db:migrate`, bukan `db:push`. `db:push` menyamakan tabel dengan schema
+Drizzle tapi **melewati file migrasi custom** — artinya seluruh policy RLS,
+trigger `auth.users` → `profiles`, dan bucket Storage tidak akan terpasang.
+
+Organisasi yang dibuat lewat aplikasi otomatis terisi data referensi (mode,
+format scrim, map pool, katalog senjata, ruleset WC 2026). Untuk mengisi ulang
+organisasi lama:
 
 ```bash
 npm run db:seed -- <org-id>
