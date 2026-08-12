@@ -1,10 +1,3 @@
-import { clsx, type ClassValue } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
 /** 90 → `"01:30"`. Scoreboard CODM menampilkan WAKTU dalam format ini. */
 export function formatDuration(seconds: number): string {
   const safe = Math.max(0, Math.round(seconds))

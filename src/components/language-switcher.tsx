@@ -5,14 +5,14 @@ import { useTransition } from 'react'
 
 import { setLocale } from '@/i18n/actions'
 import { LOCALE_LABELS, LOCALES, type Locale } from '@/i18n/config'
-import { cn } from '@/lib/format'
+import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher({ className }: { className?: string }) {
   const current = useLocale() as Locale
   const [isPending, startTransition] = useTransition()
 
   return (
-    <div className={cn('flex gap-1 rounded-lg bg-surface p-1', className)}>
+    <div className={cn('flex gap-1 rounded-lg bg-card p-1', className)}>
       {LOCALES.map((locale) => (
         <button
           key={locale}
@@ -24,8 +24,8 @@ export function LanguageSwitcher({ className }: { className?: string }) {
           className={cn(
             'rounded-md px-2.5 py-1 text-xs font-medium uppercase transition-colors',
             locale === current
-              ? 'bg-accent text-accent-fg'
-              : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
+              ? 'bg-primary text-primary-foreground'
+              : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
             isPending && 'opacity-60',
           )}
         >

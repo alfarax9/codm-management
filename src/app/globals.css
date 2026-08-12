@@ -1,42 +1,131 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
 
 /**
- * Dark-first. Aplikasi ini dipakai saat scrim malam hari di ruangan gelap,
- * jadi tema terang tidak disediakan.
+ * Dark-first. Aplikasi ini dipakai saat scrim malam hari, jadi tema terang
+ * tidak disediakan — `:root` dan `.dark` sengaja bernilai sama.
+ *
+ * Hanya ada satu sistem token: milik shadcn. Warna khusus domain (win/loss/warn)
+ * ditambahkan sebagai variabel baru, bukan sistem paralel, supaya komponen
+ * shadcn dan komponen sendiri memakai skala yang sama.
  */
-@theme {
-  --color-bg: oklch(0.16 0.008 260);
-  --color-surface: oklch(0.21 0.01 260);
-  --color-surface-hover: oklch(0.25 0.012 260);
-  --color-border: oklch(0.31 0.014 260);
+:root,
+.dark {
+  --background: oklch(0.16 0.008 260);
+  --foreground: oklch(0.96 0.004 260);
 
-  --color-fg: oklch(0.96 0.004 260);
-  --color-fg-muted: oklch(0.72 0.012 260);
-  --color-fg-subtle: oklch(0.56 0.014 260);
+  --card: oklch(0.21 0.01 260);
+  --card-foreground: oklch(0.96 0.004 260);
+  --popover: oklch(0.21 0.01 260);
+  --popover-foreground: oklch(0.96 0.004 260);
 
-  --color-accent: oklch(0.76 0.19 145);
-  --color-accent-fg: oklch(0.18 0.03 145);
+  --primary: oklch(0.76 0.19 145);
+  --primary-foreground: oklch(0.18 0.03 145);
 
-  --color-win: oklch(0.76 0.19 145);
-  --color-loss: oklch(0.66 0.21 22);
-  --color-warn: oklch(0.82 0.16 85);
+  --secondary: oklch(0.25 0.012 260);
+  --secondary-foreground: oklch(0.96 0.004 260);
 
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  --muted: oklch(0.25 0.012 260);
+  --muted-foreground: oklch(0.72 0.012 260);
+
+  --accent: oklch(0.28 0.014 260);
+  --accent-foreground: oklch(0.96 0.004 260);
+
+  --destructive: oklch(0.66 0.21 22);
+
+  --border: oklch(0.31 0.014 260);
+  --input: oklch(0.31 0.014 260);
+  --ring: oklch(0.76 0.19 145);
+
+  /* Hasil map & status pelanggaran. */
+  --win: oklch(0.76 0.19 145);
+  --loss: oklch(0.66 0.21 22);
+  --warn: oklch(0.82 0.16 85);
+
+  /* Deret warna chart: satu warna per mode (HP, SnD, Control) lalu netral. */
+  --chart-1: oklch(0.76 0.19 145);
+  --chart-2: oklch(0.72 0.15 240);
+  --chart-3: oklch(0.82 0.16 85);
+  --chart-4: oklch(0.66 0.21 22);
+  --chart-5: oklch(0.6 0.02 260);
+
+  --radius: 0.5rem;
+
+  --sidebar: oklch(0.19 0.009 260);
+  --sidebar-foreground: oklch(0.96 0.004 260);
+  --sidebar-primary: oklch(0.76 0.19 145);
+  --sidebar-primary-foreground: oklch(0.18 0.03 145);
+  --sidebar-accent: oklch(0.25 0.012 260);
+  --sidebar-accent-foreground: oklch(0.96 0.004 260);
+  --sidebar-border: oklch(0.31 0.014 260);
+  --sidebar-ring: oklch(0.76 0.19 145);
 }
 
-html {
-  color-scheme: dark;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-win: var(--win);
+  --color-loss: var(--loss);
+  --color-warn: var(--warn);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-heading: var(--font-sans);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
 }
 
-body {
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-sans);
-}
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
 
-/* Angka statistik harus sejajar di kolom tabel scoreboard. */
-.tabular {
-  font-variant-numeric: tabular-nums;
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Angka statistik harus sejajar di kolom tabel scoreboard. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
 }
