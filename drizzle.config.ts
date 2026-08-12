@@ -1,4 +1,7 @@
-import 'dotenv/config'
+import { config } from 'dotenv'
+
+// Skrip drizzle-kit tidak melewati Next.js, jadi .env.local harus dimuat manual.
+config({ path: ['.env.local', '.env'], quiet: true })
 import { defineConfig } from 'drizzle-kit'
 
 export default defineConfig({

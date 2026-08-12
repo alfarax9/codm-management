@@ -30,9 +30,11 @@ npm run db:seed -- <org-id>
 | `npm run build` | Build produksi |
 | `npm test` | Unit test rule engine |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run db:generate` | Buat file migrasi SQL dari schema |
-| `npm run db:push` | Terapkan schema langsung ke database |
-| `npm run db:studio` | Drizzle Studio |
+| `npm run db:migrate` | Jalankan migrasi — tabel, RLS, trigger, bucket |
+| `npm run db:check` | Periksa kesehatan DB: tabel, RLS, policy, trigger, bucket, seed |
+| `npm run db:studio` | Drizzle Studio — jelajahi & sunting isi tabel |
+| `npm run db:generate` | Buat file migrasi SQL baru dari perubahan schema |
+| `npm run db:seed -- <org-id>` | Isi ulang data referensi organisasi |
 
 ## Struktur
 
@@ -89,3 +91,24 @@ scorestreak — semua di luar daftar dilarang). Aturan ber-scope ditangani, mis.
 attachment yang hanya dilarang di satu senjata atau di satu kelas senjata.
 Ditambah dua validator berdiri sendiri: operator skill unik per tim, dan pool
 weapon class role 3 AR / 3 SMG / 1 LMG / 1 Shotgun / 1 Marksman / 1 Sniper.
+
+## Memeriksa database
+
+`npm run db:check` menjawab pertanyaan yang tidak terlihat dari isi tabel:
+
+```
+Tabel & RLS          34 tabel ada, RLS menyala, jumlah policy terpasang
+Helper & trigger     12 fungsi SECURITY DEFINER, trigger auth.users → profiles
+Storage              bucket map-images (publik), scoreboards, rulesets (privat)
+Data referensi       jumlah baris mode, format, map, ruleset
+Penegakan RLS        user non-anggota harus melihat 0 organisasi
+```
+
+Pemeriksaan terakhir yang paling penting. RLS bisa menyala dan policy-nya
+lengkap, tapi tetap tidak berpengaruh kalau query dijalankan sebagai pemilik
+database — dan `DATABASE_URL` memang memakai role itu. Tes tersebut menjalankan
+query lewat `withRls()` atas nama user acak; kalau ia masih melihat organisasi,
+berarti pembatasannya bocor.
+
+Untuk melihat isi tabel: `npm run db:studio`, atau Table Editor dan SQL Editor
+di dashboard Supabase.
