@@ -228,6 +228,10 @@
     "changePasswordDescription": "Enter a new password for your account.",
     "savePassword": "Save password",
     "saving": "Saving…",
+    "confirmTitle": "Finish verifying",
+    "confirmDescription": "One more step before you continue.",
+    "confirmHint": "Click this yourself — this stops email security scanners (e.g. Gmail) from using your link before you open it.",
+    "confirmButton": "Continue",
     "messages": {
       "invalidEmail": "That email address isn't valid.",
       "passwordRequired": "Password is required.",

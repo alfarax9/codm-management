@@ -1,5 +1,6 @@
 'use server'
 
+import type { EmailOtpType } from '@supabase/supabase-js'
 import { getTranslations } from 'next-intl/server'
 import { revalidatePath } from 'next/cache'
 import { cookies, headers } from 'next/headers'
@@ -7,6 +8,7 @@ import { redirect } from 'next/navigation'
 
 import { isMemberOf, ORG_COOKIE, requireUser } from '@/lib/auth/session'
 import { AppError } from '@/lib/errors'
+import { resolveDestination } from '@/lib/auth/redirect'
 import { createClient } from '@/lib/supabase/server'
 
 import { emailSchema, setPasswordSchema, signInSchema, signUpSchema } from './schema'
@@ -126,6 +128,36 @@ export async function updatePassword(
 
   if (error) return { error: error.message }
   return { message: t('passwordUpdated') }
+}
+
+/**
+ * Menyelesaikan verifikasi tautan email (pendaftaran, reset kata sandi).
+ *
+ * Dipanggil dari form di `/auth/confirm` setelah pengguna sendiri yang menekan
+ * tombol — bukan otomatis saat halaman dibuka. `token_hash` hanya sekali pakai,
+ * dan penyedia email memindai tautan secara otomatis lewat GET sebelum
+ * penggunanya sendiri membukanya, sehingga verifikasi otomatis di GET membuat
+ * token habis duluan. Form butuh submit sungguhan, yang tidak dilakukan
+ * pemindai otomatis.
+ */
+export async function confirmEmailLink(formData: FormData): Promise<void> {
+  const tokenHash = formData.get('token_hash')
+  const type = formData.get('type')
+  const next = formData.get('next')
+
+  if (typeof tokenHash !== 'string' || typeof type !== 'string') {
+    redirect('/login')
+  }
+
+  const supabase = await createClient()
+  const { error } = await supabase.auth.verifyOtp({
+    type: type as EmailOtpType,
+    token_hash: tokenHash,
+  })
+
+  if (error) redirect(`/login?error=${encodeURIComponent(error.message)}`)
+
+  redirect(resolveDestination(type as EmailOtpType, typeof next === 'string' ? next : null))
 }
 
 export async function signOut() {

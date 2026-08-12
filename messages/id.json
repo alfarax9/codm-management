@@ -228,6 +228,10 @@
     "changePasswordDescription": "Masukkan kata sandi baru untuk akunmu.",
     "savePassword": "Simpan kata sandi",
     "saving": "Menyimpan…",
+    "confirmTitle": "Selesaikan verifikasi",
+    "confirmDescription": "Satu langkah lagi sebelum lanjut.",
+    "confirmHint": "Klik tombol ini sendiri — langkah ini mencegah pemindai keamanan email (mis. Gmail) memakai tautanmu sebelum kamu sendiri membukanya.",
+    "confirmButton": "Lanjutkan",
     "messages": {
       "invalidEmail": "Format email tidak valid.",
       "passwordRequired": "Kata sandi wajib diisi.",
