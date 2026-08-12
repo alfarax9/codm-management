@@ -9,6 +9,12 @@ const serverSchema = z.object({
   DATABASE_URL: z.url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
   ANTHROPIC_API_KEY: z.string().min(1).optional(),
+  /**
+   * Opsional: fitur email hanya dinonaktifkan kalau kosong, tidak menggagalkan
+   * boot. Email login TIDAK lewat sini — itu dikirim mailer internal Supabase.
+   */
+  RESEND_API_KEY: z.string().min(1).optional(),
+  EMAIL_FROM: z.email().default('onboarding@resend.dev'),
 })
 
 const clientSchema = z.object({

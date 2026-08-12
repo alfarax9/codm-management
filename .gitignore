@@ -30,8 +30,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files — semua diabaikan karena berisi kredensial,
+# kecuali .env.example yang justru mendokumentasikan variabel yang dibutuhkan.
 .env*
+!.env.example
 
 # vercel
 .vercel

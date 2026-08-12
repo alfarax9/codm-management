@@ -14,7 +14,8 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx src/db/seed/run.ts",
     "test": "tsx --test \"src/**/*.test.ts\"",
-    "db:check": "tsx src/db/check.ts"
+    "db:check": "tsx src/db/check.ts",
+    "email:test": "tsx src/lib/email-test.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.116.0",
@@ -37,6 +38,8 @@
     "react-dom": "19.2.8",
     "react-hook-form": "^7.85.0",
     "recharts": "^3.10.1",
+    "resend": "^6.19.0",
+    "server-only": "^0.0.1",
     "shadcn": "^4.16.2",
     "sonner": "^2.0.8",
     "tailwind-merge": "^3.6.0",
