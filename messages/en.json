@@ -1,0 +1,161 @@
+{
+  "common": {
+    "appName": "CODM Management",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "upload": "Upload",
+    "search": "Search",
+    "loading": "Loading…",
+    "empty": "No data yet",
+    "back": "Back",
+    "language": "Language",
+    "confirm": "Confirm",
+    "required": "Required"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "scrims": "Scrims",
+    "roster": "Roster",
+    "maps": "Maps",
+    "formats": "Formats",
+    "rules": "Rules",
+    "loadouts": "Loadouts",
+    "analytics": "Analytics",
+    "analyst": "Analyst",
+    "settings": "Settings"
+  },
+  "modes": {
+    "hp": "Hardpoint",
+    "snd": "Search & Destroy",
+    "ctrl": "Control"
+  },
+  "stats": {
+    "score": "Score",
+    "kills": "Kills",
+    "deaths": "Deaths",
+    "assists": "Assists",
+    "kda": "K/D/A",
+    "kd": "K/D Ratio",
+    "objTime": "Time",
+    "hillTime": "Hill Time",
+    "zoneTime": "Zone Time",
+    "impact": "Impact",
+    "accuracy": "Accuracy",
+    "headshot": "Headshot",
+    "mvp": "MVP",
+    "placement": "Placement"
+  },
+  "format": {
+    "title": "Scrim Format",
+    "code": "Code",
+    "gamesCount": "{count} games",
+    "quotaHint": "1st digit = number of Hardpoint maps, 2nd = Search & Destroy, 3rd = Control.",
+    "remaining": "Remaining quota",
+    "builderTitle": "New Format",
+    "orderFree": "Play order is free — each game picks a mode from the remaining quota."
+  },
+  "scrim": {
+    "title": "Scrim",
+    "new": "New Scrim",
+    "opponent": "Opponent",
+    "scheduledAt": "Scheduled",
+    "ruleset": "Active ruleset",
+    "status": {
+      "scheduled": "Scheduled",
+      "live": "Live",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "game": "Game {no}",
+    "declareOutcome": "Declare map outcome",
+    "result": { "win": "Win", "loss": "Loss", "tie": "Tie" },
+    "autofill": "Auto-fill from screenshot",
+    "playerStats": "Player Stats",
+    "mapFlow": "Map Flow",
+    "addRound": "Add Round",
+    "endedBy": {
+      "label": "Ended by",
+      "elimination": "Elimination",
+      "bomb_exploded": "Bomb Exploded",
+      "bomb_defused": "Bomb Defused",
+      "time_expired": "Time Expired"
+    },
+    "side": { "label": "Side", "atk": "Attack", "def": "Defense" }
+  },
+  "composition": {
+    "quotaExceeded": "{mode} exceeds its quota ({used} of {allowed}).",
+    "quotaUnfilled": "{mode} has only {used} of {allowed} filled.",
+    "duplicateMap": "The same map is used twice in {mode} (games {games}).",
+    "emptySlot": "Game {no} is not filled in yet."
+  },
+  "rules": {
+    "title": "Rules",
+    "upload": "Upload Ruleset",
+    "review": "Review Parsed Rules",
+    "activate": "Activate",
+    "status": { "draft": "Draft", "active": "Active", "archived": "Archived" },
+    "aiDraft": "AI draft — needs review",
+    "allowed": "Allowed",
+    "banned": "Banned",
+    "searchPlaceholder": "Search a weapon, perk, or utility…",
+    "category": {
+      "weapon": "Weapons",
+      "attachment": "Attachments",
+      "perk": "Perks",
+      "lethal": "Lethal",
+      "tactical": "Tactical",
+      "operator_skill": "Operator Skills",
+      "scorestreak": "Scorestreaks",
+      "wildcard": "Wildcards",
+      "cosmetic": "Cosmetics",
+      "gameplay_setting": "Gameplay Settings",
+      "map_pool": "Map Pool",
+      "class_role": "Weapon Class Roles",
+      "custom": "Other"
+    }
+  },
+  "violation": {
+    "banned": "{item} is banned by the active ruleset.",
+    "notAllowlisted": "{item} is not on the allowed list.",
+    "duplicateOperatorSkill": "{skill} is already used by {players} — an operator skill may only be used by one player.",
+    "count": "{count} violations",
+    "none": "No violations"
+  },
+  "classRole": {
+    "title": "Weapon Class Roles",
+    "countMismatch": "{role} declared {declared}, required {required}.",
+    "wrongRoleCount": "{player} declared {declared} roles, required {required}."
+  },
+  "maps": {
+    "title": "Maps",
+    "upload": "Upload Map",
+    "name": "Map Name",
+    "image": "Map Image",
+    "minimap": "Minimap",
+    "playedIn": "Played in modes",
+    "official": "Official",
+    "custom": "Custom"
+  },
+  "analyst": {
+    "title": "Analyst",
+    "assign": "Assign Analyst",
+    "scope": { "scrim": "Per Scrim", "week": "Per Week" },
+    "myAssignments": "My Assignments",
+    "status": { "pending": "Pending", "in_progress": "In progress", "done": "Done" },
+    "weeklyReport": "Weekly Report",
+    "grade": "Grade",
+    "strengths": "Strengths",
+    "weaknesses": "Weaknesses",
+    "draftWithAi": "Draft with AI",
+    "ratings": {
+      "slaying": "Slaying",
+      "objective": "Objective",
+      "consistency": "Consistency",
+      "utility": "Utility",
+      "comms": "Comms"
+    }
+  }
+}

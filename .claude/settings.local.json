@@ -5,7 +5,16 @@
       "mcp__claude-in-chrome__find",
       "mcp__claude-in-chrome__computer",
       "Bash(npm -v)",
-      "Bash(npx --yes create-next-app@latest . --ts --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm --yes)"
+      "Bash(npx --yes create-next-app@latest . --ts --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm --yes)",
+      "Bash(npm i *)",
+      "Bash(node -p \"['next-intl','drizzle-orm','drizzle-kit','zod','@supabase/ssr','@anthropic-ai/sdk'].map\\(p=>p+' '+require\\('./node_modules/'+p+'/package.json'\\).version\\).join\\('\\\\n'\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(DATABASE_URL=\"postgresql://u:p@localhost:5432/x\" npx drizzle-kit generate)",
+      "Bash(npx tsx *)",
+      "Bash(node -e ' *)",
+      "Bash(npm run *)",
+      "Bash(npx --yes @next/codemod@canary middleware-to-proxy . --force)",
+      "Bash(npm test *)"
     ]
   }
 }

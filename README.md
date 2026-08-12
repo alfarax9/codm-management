@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CODM Management
 
-## Getting Started
+Manajemen scrim, statistik, dan analisis untuk tim kompetitif Call of Duty Mobile.
+Desain lengkap ada di [docs/BRAINSTORM.md](docs/BRAINSTORM.md).
 
-First, run the development server:
+## Menjalankan
 
 ```bash
+cp .env.example .env.local   # isi kredensial Supabase
+npm install
+npm run db:push              # buat tabel di Supabase
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Setelah organisasi pertama dibuat lewat aplikasi, isi data referensi
+(mode, format scrim, map pool, katalog senjata, ruleset WC 2026):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run db:seed -- <org-id>
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Perintah | Fungsi |
+|---|---|
+| `npm run dev` | Server pengembangan |
+| `npm run build` | Build produksi |
+| `npm test` | Unit test rule engine |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run db:generate` | Buat file migrasi SQL dari schema |
+| `npm run db:push` | Terapkan schema langsung ke database |
+| `npm run db:studio` | Drizzle Studio |
 
-## Learn More
+## Struktur
 
-To learn more about Next.js, take a look at the following resources:
+```
+docs/                      dokumen desain
+drizzle/                   migrasi SQL hasil generate
+messages/                  terjemahan UI — id.json, en.json
+src/
+├── app/                   route Next.js (App Router)
+│   ├── (app)/             halaman di balik login, pakai sidebar
+│   └── login/             halaman publik
+├── components/            komponen lintas fitur
+├── db/
+│   ├── schema/            definisi tabel Drizzle, dipecah per domain
+│   ├── seed/              data referensi + skrip seeding
+│   └── index.ts           koneksi database
+├── features/              modul per fitur (components/, queries.ts, actions.ts, schema.ts)
+├── i18n/                  konfigurasi & aksi ganti bahasa
+├── lib/
+│   ├── metrics/           perhitungan statistik pemain — pure function
+│   ├── rules/             rule engine format & loadout — pure function
+│   ├── supabase/          client server & browser
+│   ├── env.ts             validasi environment
+│   └── format.ts          formatter (durasi, K/D/A, cn)
+├── types/                 tipe domain lintas layer
+└── proxy.ts               refresh sesi Supabase + proteksi route
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Aturan main di kode
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Feature-first.** Modul fitur berisi `components/`, `queries.ts` (baca),
+  `actions.ts` (tulis), `schema.ts` (Zod). Komponen tidak pernah `import { db }`.
+- **Logika aturan itu pure function.** Validator loadout, kuota format, dan
+  agregasi metrik tidak menyentuh database, jadi bisa dijalankan di server maupun
+  di browser dan diuji tanpa koneksi.
+- **Satu sumber tipe.** Skema Zod ditulis sekali, tipe TypeScript diturunkan
+  dengan `z.infer`.
+- **Tidak ada teks hardcode.** Semua lewat `next-intl`.
 
-## Deploy on Vercel
+## Rule engine
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Dua bagian yang paling menentukan perilaku aplikasi, keduanya di `src/lib/rules/`
+dan tercakup unit test:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Format scrim** (`format.ts`) — kode 3 digit adalah kuota map per mode dengan
+urutan `HP · SND · CTRL`. `232` berarti 2 map Hardpoint, 3 map Search & Destroy,
+2 map Control — total 7 game. Urutan main bebas; tiap slot memilih mode dari sisa
+kuota, dan map tidak boleh berulang di dalam mode yang sama.
+
+**Loadout** (`loadout.ts`, `ruleset.ts`) — ruleset dikompilasi jadi indeks lalu
+dipakai memvalidasi lima loadout sekaligus. Mendukung dua model restriksi:
+`ban` (senjata, attachment, perk, utility) dan `allow` (operator skill,
+scorestreak — semua di luar daftar dilarang). Aturan ber-scope ditangani, mis.
+attachment yang hanya dilarang di satu senjata atau di satu kelas senjata.
+Ditambah dua validator berdiri sendiri: operator skill unik per tim, dan pool
+weapon class role 3 AR / 3 SMG / 1 LMG / 1 Shotgun / 1 Marksman / 1 Sniper.

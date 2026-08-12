@@ -1,26 +1,42 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/**
+ * Dark-first. Aplikasi ini dipakai saat scrim malam hari di ruangan gelap,
+ * jadi tema terang tidak disediakan.
+ */
+@theme {
+  --color-bg: oklch(0.16 0.008 260);
+  --color-surface: oklch(0.21 0.01 260);
+  --color-surface-hover: oklch(0.25 0.012 260);
+  --color-border: oklch(0.31 0.014 260);
+
+  --color-fg: oklch(0.96 0.004 260);
+  --color-fg-muted: oklch(0.72 0.012 260);
+  --color-fg-subtle: oklch(0.56 0.014 260);
+
+  --color-accent: oklch(0.76 0.19 145);
+  --color-accent-fg: oklch(0.18 0.03 145);
+
+  --color-win: oklch(0.76 0.19 145);
+  --color-loss: oklch(0.66 0.21 22);
+  --color-warn: oklch(0.82 0.16 85);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+}
+
+/* Angka statistik harus sejajar di kolom tabel scoreboard. */
+.tabular {
+  font-variant-numeric: tabular-nums;
 }

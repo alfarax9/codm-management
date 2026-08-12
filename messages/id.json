@@ -1,0 +1,161 @@
+{
+  "common": {
+    "appName": "CODM Management",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Ubah",
+    "create": "Buat",
+    "upload": "Unggah",
+    "search": "Cari",
+    "loading": "Memuat…",
+    "empty": "Belum ada data",
+    "back": "Kembali",
+    "language": "Bahasa",
+    "confirm": "Konfirmasi",
+    "required": "Wajib diisi"
+  },
+  "nav": {
+    "dashboard": "Dasbor",
+    "scrims": "Scrim",
+    "roster": "Roster",
+    "maps": "Map",
+    "formats": "Format",
+    "rules": "Peraturan",
+    "loadouts": "Loadout",
+    "analytics": "Analitik",
+    "analyst": "Analyst",
+    "settings": "Pengaturan"
+  },
+  "modes": {
+    "hp": "Hardpoint",
+    "snd": "Search & Destroy",
+    "ctrl": "Control"
+  },
+  "stats": {
+    "score": "Skor",
+    "kills": "Kill",
+    "deaths": "Death",
+    "assists": "Assist",
+    "kda": "K/D/A",
+    "kd": "Rasio K/D",
+    "objTime": "Waktu",
+    "hillTime": "Waktu Hill",
+    "zoneTime": "Waktu Zona",
+    "impact": "Impact",
+    "accuracy": "Akurasi",
+    "headshot": "Headshot",
+    "mvp": "MVP",
+    "placement": "Peringkat"
+  },
+  "format": {
+    "title": "Format Scrim",
+    "code": "Kode",
+    "gamesCount": "{count} game",
+    "quotaHint": "Digit ke-1 = jumlah map Hardpoint, ke-2 = Search & Destroy, ke-3 = Control.",
+    "remaining": "Sisa kuota",
+    "builderTitle": "Buat Format Baru",
+    "orderFree": "Urutan main bebas — tiap game memilih mode dari sisa kuota."
+  },
+  "scrim": {
+    "title": "Scrim",
+    "new": "Scrim Baru",
+    "opponent": "Lawan",
+    "scheduledAt": "Jadwal",
+    "ruleset": "Peraturan yang dipakai",
+    "status": {
+      "scheduled": "Terjadwal",
+      "live": "Berlangsung",
+      "completed": "Selesai",
+      "cancelled": "Dibatalkan"
+    },
+    "game": "Game {no}",
+    "declareOutcome": "Tentukan hasil map",
+    "result": { "win": "Menang", "loss": "Kalah", "tie": "Seri" },
+    "autofill": "Isi otomatis dari screenshot",
+    "playerStats": "Statistik Pemain",
+    "mapFlow": "Alur Map",
+    "addRound": "Tambah Ronde",
+    "endedBy": {
+      "label": "Berakhir karena",
+      "elimination": "Eliminasi",
+      "bomb_exploded": "Bom Meledak",
+      "bomb_defused": "Bom Dijinakkan",
+      "time_expired": "Waktu Habis"
+    },
+    "side": { "label": "Sisi", "atk": "Menyerang", "def": "Bertahan" }
+  },
+  "composition": {
+    "quotaExceeded": "Mode {mode} sudah melebihi kuota ({used} dari {allowed}).",
+    "quotaUnfilled": "Mode {mode} baru terisi {used} dari {allowed}.",
+    "duplicateMap": "Map yang sama dipakai dua kali di mode {mode} (game {games}).",
+    "emptySlot": "Game {no} belum diisi."
+  },
+  "rules": {
+    "title": "Peraturan",
+    "upload": "Unggah Ruleset",
+    "review": "Tinjau Hasil Parsing",
+    "activate": "Aktifkan",
+    "status": { "draft": "Draf", "active": "Aktif", "archived": "Arsip" },
+    "aiDraft": "Draf AI — perlu ditinjau",
+    "allowed": "Boleh",
+    "banned": "Dilarang",
+    "searchPlaceholder": "Cari senjata, perk, atau utility…",
+    "category": {
+      "weapon": "Senjata",
+      "attachment": "Attachment",
+      "perk": "Perk",
+      "lethal": "Lethal",
+      "tactical": "Tactical",
+      "operator_skill": "Operator Skill",
+      "scorestreak": "Scorestreak",
+      "wildcard": "Wildcard",
+      "cosmetic": "Kosmetik",
+      "gameplay_setting": "Pengaturan Gameplay",
+      "map_pool": "Map Pool",
+      "class_role": "Weapon Class Role",
+      "custom": "Lainnya"
+    }
+  },
+  "violation": {
+    "banned": "{item} dilarang oleh ruleset yang dipakai.",
+    "notAllowlisted": "{item} tidak ada di daftar yang diizinkan.",
+    "duplicateOperatorSkill": "{skill} sudah dipakai oleh {players} — satu operator skill hanya boleh dipakai satu pemain.",
+    "count": "{count} pelanggaran",
+    "none": "Tidak ada pelanggaran"
+  },
+  "classRole": {
+    "title": "Weapon Class Role",
+    "countMismatch": "{role} terdeklarasi {declared}, seharusnya {required}.",
+    "wrongRoleCount": "{player} mendeklarasikan {declared} role, seharusnya {required}."
+  },
+  "maps": {
+    "title": "Map",
+    "upload": "Unggah Map",
+    "name": "Nama Map",
+    "image": "Gambar Map",
+    "minimap": "Denah (Minimap)",
+    "playedIn": "Dimainkan di mode",
+    "official": "Resmi",
+    "custom": "Kustom"
+  },
+  "analyst": {
+    "title": "Analyst",
+    "assign": "Tugaskan Analyst",
+    "scope": { "scrim": "Per Scrim", "week": "Per Minggu" },
+    "myAssignments": "Tugas Saya",
+    "status": { "pending": "Belum dikerjakan", "in_progress": "Sedang dikerjakan", "done": "Selesai" },
+    "weeklyReport": "Rapor Mingguan",
+    "grade": "Nilai",
+    "strengths": "Kekuatan",
+    "weaknesses": "Kelemahan",
+    "draftWithAi": "Buat draf dengan AI",
+    "ratings": {
+      "slaying": "Slaying",
+      "objective": "Objektif",
+      "consistency": "Konsistensi",
+      "utility": "Utility",
+      "comms": "Komunikasi"
+    }
+  }
+}
