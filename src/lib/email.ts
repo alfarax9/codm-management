@@ -51,7 +51,9 @@ export async function sendEmail({ to, subject, html }: SendEmailInput): Promise<
   })
 
   if (error) return { ok: false, error: error.message }
-  if (!data) return { ok: false, error: 'Resend tidak mengembalikan id pengiriman.' }
+  // Kode teknis, bukan kalimat: hasil fungsi ini masuk log dan diputuskan
+  // pemanggilnya, bukan langsung ditampilkan ke pengguna.
+  if (!data) return { ok: false, error: 'resend_no_send_id' }
 
   return { ok: true, id: data.id }
 }

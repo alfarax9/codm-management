@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
-import { getLocale } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 import './globals.css'
 import { Geist } from "next/font/google";
@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
-export const metadata: Metadata = {
-  title: 'CODM Management',
-  description: 'Manajemen scrim, statistik, dan analisis tim kompetitif Call of Duty Mobile.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations()
+  return { title: t('common.appName'), description: t('meta.description') }
 }
 
 export default async function RootLayout({ children }: LayoutProps<'/'>) {

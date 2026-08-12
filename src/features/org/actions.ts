@@ -1,5 +1,6 @@
 'use server'
 
+import { getTranslations } from 'next-intl/server'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -10,11 +11,11 @@ import { organizations, orgMembers, teams } from '@/db/schema'
 import { seedOrgReference } from '@/db/seed/seed-org'
 import type { ActionState } from '@/features/auth/actions'
 import { ORG_COOKIE, requireUser } from '@/lib/auth/session'
-import { toLogMessage, toUserMessage } from '@/lib/db-error'
+import { resolveErrorKey, toLogMessage } from '@/lib/errors'
 
 const createOrgSchema = z.object({
-  name: z.string().trim().min(2, 'Nama organisasi minimal 2 karakter.').max(60),
-  teamName: z.string().trim().min(2, 'Nama roster minimal 2 karakter.').max(60),
+  name: z.string().trim().min(2, 'nameTooShort').max(60),
+  teamName: z.string().trim().min(2, 'teamNameTooShort').max(60),
 })
 
 const slugify = (name: string) =>
@@ -31,13 +32,14 @@ const slugify = (name: string) =>
  * tidak tertinggal di database.
  */
 export async function createOrg(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const t = await getTranslations()
   const user = await requireUser()
 
   const parsed = createOrgSchema.safeParse({
     name: formData.get('name'),
     teamName: formData.get('teamName'),
   })
-  if (!parsed.success) return { error: parsed.error.issues[0].message }
+  if (!parsed.success) return { error: t(`org.messages.${parsed.error.issues[0].message}`) }
 
   const { name, teamName } = parsed.data
   // Slug dibuat unik dengan sufiks acak; nama organisasi boleh sama.
@@ -59,7 +61,8 @@ export async function createOrg(_prev: ActionState, formData: FormData): Promise
     })
   } catch (error) {
     console.error('createOrg gagal:', toLogMessage(error))
-    return { error: toUserMessage(error, 'Gagal membuat organisasi.') }
+    const { key, params } = resolveErrorKey(error, 'org.messages.createFailed')
+    return { error: t(key, params) }
   }
 
   const cookieStore = await cookies()

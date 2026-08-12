@@ -161,7 +161,20 @@
     "count": "{count} maps · managed at organization level, shared by all rosters.",
     "empty": "No maps yet.",
     "saving": "Saving…",
-    "save": "Save"
+    "save": "Save",
+    "messages": {
+      "nameTooShort": "Map name must be at least 2 characters.",
+      "modeRequired": "Pick at least one mode.",
+      "imageTooLarge": "Image must be 5 MB or smaller.",
+      "imageWrongType": "Image must be PNG, JPEG, or WebP.",
+      "uploadFailed": "Could not upload the image.",
+      "saveFailed": "Could not save the map.",
+      "deleteFailed": "Could not delete the map.",
+      "inUse": "This map is used by recorded scrims. Deactivate it instead so the history stays intact.",
+      "created": "Map added.",
+      "updated": "Map updated.",
+      "deleted": "Map deleted."
+    }
   },
   "analyst": {
     "title": "Analyst",
@@ -214,7 +227,20 @@
     "changePasswordTitle": "Change password",
     "changePasswordDescription": "Enter a new password for your account.",
     "savePassword": "Save password",
-    "saving": "Saving…"
+    "saving": "Saving…",
+    "messages": {
+      "invalidEmail": "That email address isn't valid.",
+      "passwordRequired": "Password is required.",
+      "passwordTooShort": "Password must be at least 8 characters.",
+      "passwordTooLong": "Password must be at most 72 characters.",
+      "passwordMismatch": "Passwords don't match.",
+      "invalidCredentials": "Wrong email or password.",
+      "emailNotConfirmed": "Your email isn't verified yet. Check your inbox for the verification link.",
+      "signUpResult": "If {email} isn't registered yet, a verification link has been sent there. If it already is, just sign in — or use Forgot password.",
+      "resetLinkSent": "If that email is registered, a password reset link has been sent.",
+      "passwordUpdated": "Password updated.",
+      "incompleteLink": "This login link is incomplete or has already been used."
+    }
   },
   "org": {
     "createTitle": "Create organization",
@@ -226,7 +252,12 @@
     "teamNameHint": "Other rosters (academy, etc.) can be added later from Settings.",
     "creating": "Setting up…",
     "createButton": "Create organization",
-    "roleLabel": "your role"
+    "roleLabel": "your role",
+    "messages": {
+      "nameTooShort": "Organization name must be at least 2 characters.",
+      "teamNameTooShort": "Roster name must be at least 2 characters.",
+      "createFailed": "Could not create the organization."
+    }
   },
   "pages": {
     "dashboard": {
@@ -327,5 +358,20 @@
         "Account language preference"
       ]
     }
+  },
+  "errors": {
+    "uniqueViolation": "That value already exists.",
+    "foreignKeyViolation": "The referenced record was not found.",
+    "insufficientPrivilege": "You don't have permission to do this.",
+    "checkViolation": "The value doesn't meet the required rules.",
+    "unknown": "Something went wrong. Please try again."
+  },
+  "session": {
+    "noManagePermission": "You don't have permission to change this data.",
+    "notOrgAdmin": "Only an organization owner or admin can do this.",
+    "notMember": "You are not a member of that organization."
+  },
+  "meta": {
+    "description": "Scrim management, stats, and analysis for competitive Call of Duty Mobile teams."
   }
 }

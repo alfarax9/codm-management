@@ -1,4 +1,5 @@
 import { type EmailOtpType } from '@supabase/supabase-js'
+import { getTranslations } from 'next-intl/server'
 import { NextResponse, type NextRequest } from 'next/server'
 
 import { createClient } from '@/lib/supabase/server'
@@ -19,6 +20,7 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl
   const next = searchParams.get('next') ?? '/dashboard'
   const supabase = await createClient()
+  const t = await getTranslations('auth.messages')
 
   const fail = (message: string) =>
     NextResponse.redirect(`${origin}/login?error=${encodeURIComponent(message)}`)
@@ -38,5 +40,5 @@ export async function GET(request: NextRequest) {
 
   // Verifikasi yang gagal di sisi Supabase dikirim balik sebagai query param.
   const supabaseError = searchParams.get('error_description') ?? searchParams.get('error')
-  return fail(supabaseError ?? 'Tautan login tidak lengkap atau sudah pernah dipakai.')
+  return fail(supabaseError ?? t('incompleteLink'))
 }

@@ -5,6 +5,7 @@ import { cache } from 'react'
 
 import { withRls } from '@/db/rls'
 import { organizations, orgMembers, profiles } from '@/db/schema'
+import { AppError } from '@/lib/errors'
 import { createClient } from '@/lib/supabase/server'
 
 export const ORG_COOKIE = 'codm_org'
@@ -97,7 +98,7 @@ export async function requireOrg(): Promise<OrgContext> {
 export async function requireManageOrg(): Promise<OrgContext> {
   const ctx = await requireOrg()
   if (!(MANAGE_ROLES as readonly string[]).includes(ctx.role)) {
-    throw new Error('Kamu tidak punya izin untuk mengubah data ini.')
+    throw new AppError('session.noManagePermission')
   }
   return ctx
 }
@@ -105,7 +106,7 @@ export async function requireManageOrg(): Promise<OrgContext> {
 export async function requireOrgAdmin(): Promise<OrgContext> {
   const ctx = await requireOrg()
   if (!(ADMIN_ROLES as readonly string[]).includes(ctx.role)) {
-    throw new Error('Hanya pemilik atau admin organisasi yang boleh melakukan ini.')
+    throw new AppError('session.notOrgAdmin')
   }
   return ctx
 }

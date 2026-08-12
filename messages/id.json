@@ -161,7 +161,20 @@
     "count": "{count} map · dikelola di level organisasi, dipakai semua roster.",
     "empty": "Belum ada map.",
     "saving": "Menyimpan…",
-    "save": "Simpan"
+    "save": "Simpan",
+    "messages": {
+      "nameTooShort": "Nama map minimal 2 karakter.",
+      "modeRequired": "Pilih minimal satu mode.",
+      "imageTooLarge": "Ukuran gambar maksimal 5 MB.",
+      "imageWrongType": "Gambar harus PNG, JPEG, atau WebP.",
+      "uploadFailed": "Gagal mengunggah gambar.",
+      "saveFailed": "Gagal menyimpan map.",
+      "deleteFailed": "Gagal menghapus map.",
+      "inUse": "Map ini sudah dipakai di scrim yang tercatat. Nonaktifkan saja agar riwayatnya tetap utuh.",
+      "created": "Map ditambahkan.",
+      "updated": "Map diperbarui.",
+      "deleted": "Map dihapus."
+    }
   },
   "analyst": {
     "title": "Analyst",
@@ -214,7 +227,20 @@
     "changePasswordTitle": "Ganti kata sandi",
     "changePasswordDescription": "Masukkan kata sandi baru untuk akunmu.",
     "savePassword": "Simpan kata sandi",
-    "saving": "Menyimpan…"
+    "saving": "Menyimpan…",
+    "messages": {
+      "invalidEmail": "Format email tidak valid.",
+      "passwordRequired": "Kata sandi wajib diisi.",
+      "passwordTooShort": "Kata sandi minimal 8 karakter.",
+      "passwordTooLong": "Kata sandi maksimal 72 karakter.",
+      "passwordMismatch": "Konfirmasi kata sandi tidak cocok.",
+      "invalidCredentials": "Email atau kata sandi salah.",
+      "emailNotConfirmed": "Email kamu belum diverifikasi. Cek inbox untuk tautan verifikasinya.",
+      "signUpResult": "Kalau {email} belum terdaftar, tautan verifikasi sudah dikirim ke sana. Kalau sudah terdaftar, langsung masuk saja — atau pakai Lupa kata sandi kalau lupa.",
+      "resetLinkSent": "Kalau email itu terdaftar, tautan penggantian kata sandi sudah dikirim.",
+      "passwordUpdated": "Kata sandi berhasil diperbarui.",
+      "incompleteLink": "Tautan login tidak lengkap atau sudah pernah dipakai."
+    }
   },
   "org": {
     "createTitle": "Buat organisasi",
@@ -226,7 +252,12 @@
     "teamNameHint": "Roster lain (academy, dsb) bisa ditambah nanti dari Pengaturan.",
     "creating": "Menyiapkan…",
     "createButton": "Buat organisasi",
-    "roleLabel": "peran kamu"
+    "roleLabel": "peran kamu",
+    "messages": {
+      "nameTooShort": "Nama organisasi minimal 2 karakter.",
+      "teamNameTooShort": "Nama roster minimal 2 karakter.",
+      "createFailed": "Gagal membuat organisasi."
+    }
   },
   "pages": {
     "dashboard": {
@@ -327,5 +358,20 @@
         "Preferensi bahasa akun"
       ]
     }
+  },
+  "errors": {
+    "uniqueViolation": "Data dengan nilai itu sudah ada.",
+    "foreignKeyViolation": "Data yang dirujuk tidak ditemukan.",
+    "insufficientPrivilege": "Kamu tidak punya izin untuk melakukan ini.",
+    "checkViolation": "Nilai yang dimasukkan tidak memenuhi aturan yang berlaku.",
+    "unknown": "Terjadi kesalahan. Coba lagi."
+  },
+  "session": {
+    "noManagePermission": "Kamu tidak punya izin untuk mengubah data ini.",
+    "notOrgAdmin": "Hanya pemilik atau admin organisasi yang boleh melakukan ini.",
+    "notMember": "Kamu bukan anggota organisasi tersebut."
+  },
+  "meta": {
+    "description": "Manajemen scrim, statistik, dan analisis tim kompetitif Call of Duty Mobile."
   }
 }

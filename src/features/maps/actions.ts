@@ -1,13 +1,14 @@
 'use server'
 
 import { and, eq } from 'drizzle-orm'
+import { getTranslations } from 'next-intl/server'
 import { revalidatePath } from 'next/cache'
 
 import { withRls } from '@/db/rls'
 import { mapModes, maps, scrimGames } from '@/db/schema'
 import type { ActionState } from '@/features/auth/actions'
 import { requireManageOrg } from '@/lib/auth/session'
-import { toLogMessage, toUserMessage } from '@/lib/db-error'
+import { AppError, resolveErrorKey, toLogMessage } from '@/lib/errors'
 import { createClient } from '@/lib/supabase/server'
 
 import { parseMapFormData } from './schema'
@@ -34,17 +35,20 @@ async function uploadImage(orgId: string, slug: string, kind: string, file: File
     .from(BUCKET)
     .upload(path, file, { contentType: file.type, upsert: false })
 
-  if (error) throw new Error(`Gagal mengunggah gambar: ${error.message}`)
+  if (error) throw new AppError('maps.messages.uploadFailed')
 
   return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl
 }
 
 /** Membuat map baru, atau memperbarui kalau `id` terisi. */
 export async function saveMap(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const t = await getTranslations()
   const ctx = await requireManageOrg()
 
   const parsed = parseMapFormData(formData)
-  if (!parsed.success) return { error: parsed.error.issues[0].message }
+  if (!parsed.success) {
+    return { error: t(`maps.messages.${parsed.error.issues[0].message}`) }
+  }
 
   const { id, name, modeIds, image, minimap } = parsed.data
   const slug = slugify(name)
@@ -90,11 +94,12 @@ export async function saveMap(_prev: ActionState, formData: FormData): Promise<A
     })
   } catch (error) {
     console.error('saveMap gagal:', toLogMessage(error))
-    return { error: toUserMessage(error, 'Gagal menyimpan map.') }
+    const { key, params } = resolveErrorKey(error, 'maps.messages.saveFailed')
+    return { error: t(key, params) }
   }
 
   revalidatePath('/maps')
-  return { message: id ? 'Map diperbarui.' : 'Map ditambahkan.' }
+  return { message: t(id ? 'maps.messages.updated' : 'maps.messages.created') }
 }
 
 /**
@@ -103,6 +108,7 @@ export async function saveMap(_prev: ActionState, formData: FormData): Promise<A
  * membuat riwayat pertandingan kehilangan nama map tanpa peringatan.
  */
 export async function deleteMap(mapId: string): Promise<ActionState> {
+  const t = await getTranslations()
   const ctx = await requireManageOrg()
 
   try {
@@ -113,19 +119,16 @@ export async function deleteMap(mapId: string): Promise<ActionState> {
         .where(eq(scrimGames.mapId, mapId))
         .limit(1)
 
-      if (used) {
-        throw new Error(
-          'Map ini sudah dipakai di scrim yang tercatat. Nonaktifkan saja agar riwayatnya tetap utuh.',
-        )
-      }
+      if (used) throw new AppError('maps.messages.inUse')
 
       await tx.delete(maps).where(and(eq(maps.id, mapId), eq(maps.orgId, ctx.orgId)))
     })
   } catch (error) {
     console.error('deleteMap gagal:', toLogMessage(error))
-    return { error: toUserMessage(error, 'Gagal menghapus map.') }
+    const { key, params } = resolveErrorKey(error, 'maps.messages.deleteFailed')
+    return { error: t(key, params) }
   }
 
   revalidatePath('/maps')
-  return { message: 'Map dihapus.' }
+  return { message: t('maps.messages.deleted') }
 }
