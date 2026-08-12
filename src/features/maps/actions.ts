@@ -7,6 +7,7 @@ import { withRls } from '@/db/rls'
 import { mapModes, maps, scrimGames } from '@/db/schema'
 import type { ActionState } from '@/features/auth/actions'
 import { requireManageOrg } from '@/lib/auth/session'
+import { toLogMessage, toUserMessage } from '@/lib/db-error'
 import { createClient } from '@/lib/supabase/server'
 
 import { parseMapFormData } from './schema'
@@ -88,7 +89,8 @@ export async function saveMap(_prev: ActionState, formData: FormData): Promise<A
       await tx.insert(mapModes).values(modeIds.map((modeId) => ({ mapId: mapId as string, modeId })))
     })
   } catch (error) {
-    return { error: error instanceof Error ? error.message : 'Gagal menyimpan map.' }
+    console.error('saveMap gagal:', toLogMessage(error))
+    return { error: toUserMessage(error, 'Gagal menyimpan map.') }
   }
 
   revalidatePath('/maps')
@@ -120,7 +122,8 @@ export async function deleteMap(mapId: string): Promise<ActionState> {
       await tx.delete(maps).where(and(eq(maps.id, mapId), eq(maps.orgId, ctx.orgId)))
     })
   } catch (error) {
-    return { error: error instanceof Error ? error.message : 'Gagal menghapus map.' }
+    console.error('deleteMap gagal:', toLogMessage(error))
+    return { error: toUserMessage(error, 'Gagal menghapus map.') }
   }
 
   revalidatePath('/maps')

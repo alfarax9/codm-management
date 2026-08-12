@@ -10,6 +10,7 @@ import { organizations, orgMembers, teams } from '@/db/schema'
 import { seedOrgReference } from '@/db/seed/seed-org'
 import type { ActionState } from '@/features/auth/actions'
 import { ORG_COOKIE, requireUser } from '@/lib/auth/session'
+import { toLogMessage, toUserMessage } from '@/lib/db-error'
 
 const createOrgSchema = z.object({
   name: z.string().trim().min(2, 'Nama organisasi minimal 2 karakter.').max(60),
@@ -57,7 +58,8 @@ export async function createOrg(_prev: ActionState, formData: FormData): Promise
       return org.id
     })
   } catch (error) {
-    return { error: error instanceof Error ? error.message : 'Gagal membuat organisasi.' }
+    console.error('createOrg gagal:', toLogMessage(error))
+    return { error: toUserMessage(error, 'Gagal membuat organisasi.') }
   }
 
   const cookieStore = await cookies()
