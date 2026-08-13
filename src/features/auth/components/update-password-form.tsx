@@ -1,13 +1,15 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { useActionState } from 'react'
 
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { updatePassword, type ActionState } from '@/features/auth/actions'
+import { cn } from '@/lib/utils'
 
 export function UpdatePasswordForm() {
   const t = useTranslations('auth')
@@ -50,9 +52,14 @@ export function UpdatePasswordForm() {
         </Alert>
       )}
       {state.message && (
-        <Alert>
-          <AlertDescription>{state.message}</AlertDescription>
-        </Alert>
+        <div className="flex flex-col gap-4">
+          <Alert>
+            <AlertDescription>{state.message}</AlertDescription>
+          </Alert>
+          <Link href="/login" className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}>
+            {t('backToLogin')}
+          </Link>
+        </div>
       )}
     </form>
   )

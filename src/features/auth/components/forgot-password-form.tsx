@@ -5,10 +5,11 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { requestPasswordReset, type ActionState } from '@/features/auth/actions'
+import { cn } from '@/lib/utils'
 
 export function ForgotPasswordForm() {
   const t = useTranslations('auth')
@@ -20,7 +21,7 @@ export function ForgotPasswordForm() {
         <Alert>
           <AlertDescription>{state.message}</AlertDescription>
         </Alert>
-        <Link href="/login" className="text-center text-sm underline underline-offset-4">
+        <Link href="/login" className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}>
           {t('backToLogin')}
         </Link>
       </div>
